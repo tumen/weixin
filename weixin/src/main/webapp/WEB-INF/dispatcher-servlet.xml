@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd" default-autowire="byName">
+
+    <mvc:annotation-driven/>
+
+    <context:annotation-config />
+    <!--
+        指定使用注解方式配置,配置自动扫描的包名,
+        base-package指定自己应用中控制器所在的包目录
+        <context:component-scan/> 扫描指定的包中的类上的注解，常用的注解有： 
+        @Controller 声明Action组件
+        @Service 声明Service组件
+        @Service("myMovieLister") 
+        @Repository 声明Dao组件
+        @Component 泛指组件, 当不好归类时. 
+        @RequestMapping("/menu") 请求映射 
+        @Resource用于注入，( j2ee提供的 ) 默认按名称装配，
+        @Resource(name="beanName") 
+        @Autowired用于注入，(srping提供的) 默认按类型装配 
+        @Transactional(rollbackFor={Exception.class}) 事务管理 
+        @ResponseBody @Scope("prototype")设定bean的作用域
+    -->
+    <context:component-scan base-package="com.tumen.app.weixin.controller" />
+    
+    <!-- 对静态资源文件的访问  方案一 （二选一） -->  
+    <mvc:default-servlet-handler/>  
+      
+    <!-- 对静态资源文件的访问  方案二 （二选一）-->  
+    <!--<mvc:resources mapping="/images/**" location="/images/" cache-period="31556926"/>  
+    <mvc:resources mapping="/js/**" location="/js/" cache-period="31556926"/>  
+    <mvc:resources mapping="/css/**" location="/css/" cache-period="31556926"/>  
+    -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/html/"
+          p:suffix=".html" />
+
+</beans>
