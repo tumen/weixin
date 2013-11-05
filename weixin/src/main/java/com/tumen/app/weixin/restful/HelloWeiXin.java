@@ -89,5 +89,6 @@ public class HelloWeiXin {
         }
         return buf.toString();
     }
+    
 
 }
